@@ -22,5 +22,8 @@ namespace Workers
             //Gathering:
             //Something that sets to GatheringState? 
 
+            //Navigation:
+            //per state,
+
     }
 }

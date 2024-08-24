@@ -4,11 +4,9 @@ namespace Workers
     public enum WorkerStateEnum 
     {
         None, 
-        Idle, 
-        Walking,
-        Gathering,
-        Eating,
-        Fleeing,
-        Wandring
+        Searching, //Resource or Food 
+        Walking, //Station, Resource, Food
+        Gathering, //Resourced, Food
+        Sleeping //Idle, Starving
     }
 }
