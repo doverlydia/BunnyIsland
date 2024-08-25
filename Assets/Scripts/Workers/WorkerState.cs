@@ -16,16 +16,6 @@ namespace Workers
             throw new System.NotImplementedException();
         }
 
-        protected override void OnStateFixedUpdate()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        protected override void OnStateUpdate()
-        {
-            throw new System.NotImplementedException();
-        }
-
         protected override UniTask StateTask()
         {
             throw new System.NotImplementedException();

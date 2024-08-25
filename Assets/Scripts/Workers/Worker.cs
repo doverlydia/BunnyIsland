@@ -2,28 +2,49 @@ using UnityEngine;
 
 namespace Workers
 {
-    internal abstract class Worker 
+    internal abstract class Worker
     {
+        //refs:
+        protected GameObject _gameObject;
+
         // Stats:
         // Agent stats:
         protected float _moveSpeed;
-        protected float _searchRadius;
         // Gatherer stats:
         protected float _gatherRate;
         protected float _gatherCapacity;
         protected float _amountGathered;
-        
+
         protected float _foodForageRate;
         protected float _foodCapacity;
         protected float _currentHunger; //maybe current filled?
+        protected float _hungerComforotThreshold;
+        protected float _hungerStarvingThreshold;
 
-
+        protected GameObject _currentTarget;
+        protected GameObject _assignedStation;
 
         //State:
         protected WorkerStateEnum _workerStateEnum;
 
-
         //Some sort of Agent
+
+        //Getters and such:
+        public virtual bool IsHungry()
+        {
+            return _currentHunger <= _hungerComforotThreshold;
+        }
+        public virtual bool IsStraving()
+        {
+            return _currentHunger <= _hungerStarvingThreshold;
+        }
+        public virtual bool HasResource()
+        {
+            return _amountGathered > 0;
+        }
+
+        public GameObject GetGameObject => _gameObject;
+
 
         // Methods:
 
@@ -55,6 +76,11 @@ namespace Workers
             //agent walk to destination, do we know what to do when we get there?
         }
         //per state,
+
+
+        
+
+
 
     }
 }
