@@ -26,13 +26,6 @@ namespace Savable
             return LoadFromDisk<T>(path);
         }
 
-        public void Unload<T>(string id)
-        {
-            var path = GetPath(typeof(T).Name, id);
-            
-            _cached.Remove(path);
-        }
-
         public void UploadAllToDisk()
         {
             foreach (var savable in _cached)
