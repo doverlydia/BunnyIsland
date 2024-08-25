@@ -4,7 +4,7 @@ using System;
 namespace Resource
 {
     [Serializable]
-    class ResourcesData
+    class ResourcesModel
     {
         SerializedDictionary<string, int> _resources;
 

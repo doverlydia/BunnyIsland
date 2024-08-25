@@ -4,7 +4,7 @@ using System;
 namespace Inventory
 {
     [Serializable]
-    class InventoryData
+    class InventoryModel
     {
         SerializedDictionary<string, int> _inventory;
         
