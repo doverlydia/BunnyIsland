@@ -1,15 +1,18 @@
 using AYellowpaper.SerializedCollections;
 using MVC;
+using Savable;
 using System;
+using Unity.Plastic.Newtonsoft.Json;
 
 namespace Resource
 {
     [Serializable]
-    class ResourcesModel : Model
+    class ResourcesModel : Model, ISavable
     {
         SerializedDictionary<string, int> _resources;
 
-        internal void Configure(SerializedDictionary<string, int> resources)
+        [JsonConstructor]
+        public ResourcesModel(SerializedDictionary<string, int> resources)
         {
             _resources = resources ?? new();
         }

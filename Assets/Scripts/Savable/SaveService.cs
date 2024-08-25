@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
 namespace Savable
 {
@@ -7,7 +8,7 @@ namespace Savable
     {
         Dictionary<string, ISavable> _cached = new();
 
-        public void Upload(ISavable savable, string id)
+        public void Upload(ISavable savable, string id = null)
         {
             var savableType = savable.GetType().Name;
             var path = GetPath(savableType, id);
@@ -16,7 +17,7 @@ namespace Savable
                 _cached[path] = savable;
         }
 
-        public T Load<T>(string id) where T : ISavable
+        public T Load<T>(string id = null) where T : ISavable
         {
             var path = GetPath(typeof(T).Name, id);
 
@@ -36,13 +37,13 @@ namespace Savable
 
         void UploadToDisk(ISavable savable, string id)
         {
-            var json = JsonUtility.ToJson(savable);
+            var json = JsonConvert.SerializeObject(savable);
             var savableType = savable.GetType().Name;
-            var dir = GetDir(savableType);
             var path = GetPath(savableType, id);
+            var dir = Path.GetDirectoryName(path);
 
             if (!Directory.Exists(dir))
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(dir);
 
             if (!File.Exists(path))
                 File.Create(path).Dispose();
@@ -59,21 +60,21 @@ namespace Savable
                 return default;
 
             var json = File.ReadAllText(path);
-            T obj = JsonUtility.FromJson<T>(json);
+            T obj = JsonConvert.DeserializeObject<T>(json);
 
             _cached.Add(path, obj);
 
             return obj;
         }
 
-        string GetDir(string savableType)
-        {
-            return $"{Application.persistentDataPath}/{savableType}";
-        }
-
         string GetPath(string savableType, string id)
         {
-            return $"{GetDir(savableType)}/{id}.txt";
+            var dir = $"{Application.persistentDataPath}/{savableType}";
+            if (id == null)
+            {
+                return $"{dir}.txt";
+            }
+            return $"{dir}/{id}.txt";
         }
     }
 }

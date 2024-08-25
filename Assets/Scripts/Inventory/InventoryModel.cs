@@ -1,18 +1,20 @@
 using AYellowpaper.SerializedCollections;
 using MVC;
+using Savable;
 using System;
+using Unity.Plastic.Newtonsoft.Json;
 
 namespace Inventory
 {
     [Serializable]
-    class InventoryModel : Model
+    class InventoryModel : Model, ISavable
     {
         SerializedDictionary<string, int> _inventory;
 
-        internal void Configure(SerializedDictionary<string, int> inventory)
+        [JsonConstructor]
+        public InventoryModel(SerializedDictionary<string, int> inventory)
         {
             _inventory = inventory ?? new();
-            Changed();
         }
 
         internal int GetAmount(string id)
