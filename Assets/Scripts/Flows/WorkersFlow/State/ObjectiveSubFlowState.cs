@@ -22,15 +22,10 @@ namespace WorkersFlow
 
         protected override void Exit()
         {
-            Clean();
+            Dispose();
         }
 
         public override void Dispose()
-        {
-            Clean();
-        }
-
-        void Clean()
         {
             _objectiveFlow.OnComplete -= GoToSetTarget;
         }
