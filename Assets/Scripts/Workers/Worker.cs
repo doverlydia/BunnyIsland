@@ -21,8 +21,8 @@ namespace Workers
         protected float _hungerComforotThreshold;
         protected float _hungerStarvingThreshold;
 
-        protected GameObject _currentTarget;
-        protected GameObject _assignedStation;
+        protected WorkerDestination _currentDestination;
+        protected WorkerDestination _assignedStation;
 
         //State:
         protected WorkerStateEnum _workerStateEnum;
@@ -51,24 +51,6 @@ namespace Workers
         public virtual void Init()
         {
             _amountGathered = 0;
-        }
-
-        //Search:
-        protected virtual void Search()
-        {
-
-        }
-
-        //Gathering:
-        //Something that sets to GatheringState? 
-        protected virtual void BeginGathering()
-        {
-
-        }
-        //protected abstract bool EndGatheringCheck();
-        protected virtual bool EndGatheringCheck()
-        {
-            return _amountGathered >= _gatherCapacity;
         }
         //Navigation:
         protected virtual void WalkToDestionation(Vector3 destionation)
