@@ -1,10 +1,11 @@
 using AYellowpaper.SerializedCollections;
+using MVC;
 using System;
 
 namespace Resource
 {
     [Serializable]
-    class ResourcesModel
+    class ResourcesModel : Model
     {
         SerializedDictionary<string, int> _resources;
 
@@ -13,22 +14,26 @@ namespace Resource
             _resources = resources ?? new();
         }
 
-        public int GetAmount(string id)
+        internal int GetAmount(string id)
         {
             if (!_resources.TryGetValue(id, out var amount))
                 return 0;
             return amount;
         }
 
-        public void Add(string id, int amount)
+        internal void Add(string id, int amount)
         {
             if (!_resources.TryAdd(id, amount))
                 _resources[id] += amount;
+
+            Changed();
         }
 
-        public void Remove(string id, int amount)
+        internal void Remove(string id, int amount)
         {
             _resources[id] -= amount;
+
+            Changed();
         }
     }
 }

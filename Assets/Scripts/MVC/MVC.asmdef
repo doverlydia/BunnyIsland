@@ -1,10 +1,7 @@
 {
-    "name": "Inventory",
-    "rootNamespace": "Inventory",
-    "references": [
-        "GUID:d525ad6bd40672747bde77962f1c401e",
-        "GUID:f2d4f2b06eec53f4daa295ac1b401a41"
-    ],
+    "name": "MVC",
+    "rootNamespace": "MVC",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
