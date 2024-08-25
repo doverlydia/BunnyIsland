@@ -6,12 +6,13 @@ namespace WorkersFlow
     {
         internal const string GoToSetTargetStateKey = "GoToSetTargetStateKey";
 
-        ObjectiveSubFlow _objectiveFlow = new();
+        ObjectiveSubFlow _objectiveFlow;
 
         public override void Enter()
         {
-            _objectiveFlow.CreateFlow();
+            _objectiveFlow = new();
             _objectiveFlow.OnComplete += GoToSetTarget;
+            _objectiveFlow.Create();
         }
 
         void GoToSetTarget()
@@ -24,7 +25,7 @@ namespace WorkersFlow
             Clean();
         }
 
-        public override void Cancel()
+        public override void Dispose()
         {
             Clean();
         }

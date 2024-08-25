@@ -18,6 +18,7 @@ namespace WorkersFlow
         protected override void SetBindings()
         {
             Bind<ObjectiveSubFlowState, SetTargetState>(ObjectiveSubFlowState.GoToSetTargetStateKey);
+            Bind<SetTargetState, EndState>(SetTargetState.GoToEndStateKey);
         }
     }
 }

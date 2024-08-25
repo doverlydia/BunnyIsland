@@ -7,7 +7,7 @@ namespace FSM
             GoToNextState();
         }
 
-        public override void Cancel() { }
+        public override void Dispose() { }
 
         protected override void Exit() { }
     }

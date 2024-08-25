@@ -5,13 +5,39 @@ namespace WorkersFlow
 {
     public class WorkerFlowCreator : MonoBehaviour
     {
-        [Button]
-        public void CreateFlow()
-        {
-            var model = new WorkerFlowModel();
-            var flow = new WorkerFlow(model);
+        WorkerFlowModel Model;
+        WorkerFlow Flow;
 
-            flow.CreateFlow();
+        [Button]
+        void CreateFlowModel()
+        {
+            Model = new();
+        }
+
+        [Button]
+        void CreateFlow()
+        {
+            Flow = new WorkerFlow(Model);
+
+            Flow.Create();
+        }
+
+        [Button]
+        void SetTarget()
+        {
+            Model.Target = transform;
+        }
+
+        [Button]
+        void RemoveTarget()
+        {
+            Model.Target = null;
+        }
+
+        [Button]
+        void CancelFlow()
+        {
+            Flow.Dispose();
         }
     }
 }

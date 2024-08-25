@@ -13,7 +13,7 @@ namespace WorkersFlow
         {
         }
 
-        public override void Cancel()
+        public override void Dispose()
         {
         }
     }

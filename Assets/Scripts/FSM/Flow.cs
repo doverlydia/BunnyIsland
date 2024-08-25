@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FSM
 {
-    public abstract class Flow
+    public abstract class Flow : IDisposable
     {
         public event Action OnComplete;
 
@@ -12,7 +12,7 @@ namespace FSM
         Dictionary<Type, Dictionary<string, Type>> _contracts = new();
         State _currentState;
 
-        public void CreateFlow()
+        public void Create()
         {
             Debug.Log($"Starting Flow {GetType()}");
 
@@ -22,9 +22,9 @@ namespace FSM
             GoToNextState();
         }
 
-        public void Cancel()
+        public void Dispose()
         {
-            _currentState?.Cancel();
+            _currentState?.Dispose();
             Debug.Log($"Cancled flow {GetType()}");
         }
 
@@ -66,7 +66,7 @@ namespace FSM
                 }
                 else
                 {
-                    _currentState?.Cancel();
+                    _currentState?.Dispose();
                     throw new Exception($"No binding exists for {_currentState.GetType()} under the key {key}!");
                 }
             }
