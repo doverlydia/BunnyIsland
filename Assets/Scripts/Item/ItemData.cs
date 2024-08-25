@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Item
 {
     [Serializable]
-    public class Item
+    public class ItemData
     {
         [SerializeField]
         internal int Price;

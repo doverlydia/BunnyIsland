@@ -7,9 +7,9 @@ namespace Item
     class ItemDb : ScriptableObject
     {
         [SerializeField]
-        SerializedDictionary<string, Item> _itemMap;
+        SerializedDictionary<string, ItemData> _itemMap;
 
-        internal Item GetItem(string id)
+        internal ItemData GetItem(string id)
         {
             if (_itemMap.TryGetValue(id, out var item))
                 return item;
