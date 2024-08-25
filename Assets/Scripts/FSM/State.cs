@@ -16,4 +16,14 @@ namespace FSM
             NextStateCalled?.Invoke(id);
         }
     }
+
+    public abstract class State<T> : State where T : FlowModel
+    {
+        T FlowModel;
+
+        internal void Configure(T flowModel)
+        {
+            FlowModel = flowModel;
+        }
+    }
 }

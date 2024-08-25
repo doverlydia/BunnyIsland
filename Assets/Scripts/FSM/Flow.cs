@@ -12,7 +12,7 @@ namespace FSM
         Dictionary<Type, Dictionary<string, Type>> _contracts;
         State _currentState;
 
-        public void Play()
+        public void CreateFlow()
         {
             Debug.Log($"Starting Flow {GetType()}");
 
@@ -85,10 +85,34 @@ namespace FSM
 
             _currentState.NextStateCalled -= GoToNextState;
 
-            _currentState = (State)Activator.CreateInstance(state);
+            _currentState = CreateState(state);
 
             _currentState.NextStateCalled += GoToNextState;
             _currentState.Enter();
+        }
+
+        protected virtual State CreateState(Type state)
+        {
+            return (State)Activator.CreateInstance(state);
+        }
+    }
+
+    public abstract class Flow<T> : Flow where T : FlowModel
+    {
+        protected T FlowModel;
+
+        public Flow(T flowModel)
+        {
+            FlowModel = flowModel;
+        }
+
+        protected override State CreateState(Type state)
+        {
+            var instance = (State)Activator.CreateInstance(state);
+            if (instance is State<T> requireModel)
+                requireModel.Configure(FlowModel);
+
+            return instance;
         }
     }
 }

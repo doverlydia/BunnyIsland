@@ -1,6 +1,6 @@
 {
-    "name": "Workers",
-    "rootNamespace": "Workers",
+    "name": "WorkersFlow",
+    "rootNamespace": "WorkersFlow",
     "references": [
         "GUID:f51ebe6a0ceec4240a699833d6309b23",
         "GUID:788f5e49bf0e3794798aeef097b536b0",

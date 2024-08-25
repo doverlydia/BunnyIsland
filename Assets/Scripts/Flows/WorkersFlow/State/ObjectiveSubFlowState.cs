@@ -1,9 +1,11 @@
 using FSM;
 
-namespace Workers
+namespace WorkersFlow
 {
-    class SleepingState : State
+    class ObjectiveSubFlowState : State<WorkerFlowModel>
     {
+        internal const string GoToSetTargetStateKey = "GoToSetTargetStateKey";
+
         public override void Cancel()
         {
             throw new System.NotImplementedException();

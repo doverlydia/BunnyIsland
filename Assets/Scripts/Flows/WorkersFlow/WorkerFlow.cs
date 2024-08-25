@@ -1,9 +1,13 @@
 using FSM;
 
-namespace Workers
+namespace WorkersFlow
 {
-    class WorkerFlow : Flow
+    class WorkerFlow : Flow<WorkerFlowModel>
     {
+        public WorkerFlow(WorkerFlowModel flowModel) : base(flowModel)
+        {
+        }
+
         protected override void SetDefaultFlow()
         {
             Add<SetTargetState>();
@@ -13,7 +17,6 @@ namespace Workers
 
         protected override void SetBindings()
         {
-            Bind<SetTargetState, SleepingState>(SetTargetState.GoToSleepStateKey);
             Bind<ObjectiveSubFlowState, SetTargetState>(ObjectiveSubFlowState.GoToSetTargetStateKey);
         }
     }
