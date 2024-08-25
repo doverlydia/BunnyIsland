@@ -11,6 +11,7 @@ namespace Resource.Icon
         public override void InstallBindings()
         {
             Container.Bind<ResourceIconDb>().FromInstance(_iconDb).AsSingle();
+            Container.Bind<ResourceWallet>().AsSingle();
         }
     }
 }
