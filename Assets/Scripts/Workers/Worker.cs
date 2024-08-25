@@ -8,10 +8,11 @@ namespace Workers
         protected GameObject _gameObject;
 
         // Stats:
+        protected float _actionDelay; //Time to wait between actions
         // Agent stats:
         protected float _moveSpeed;
         // Gatherer stats:
-        protected float _gatherRate;
+        protected float _gatherRate; //Now just per-strike
         protected float _gatherCapacity;
         protected float _amountGathered;
 
@@ -23,6 +24,8 @@ namespace Workers
 
         protected WorkerDestination _currentDestination;
         protected WorkerDestination _assignedStation;
+        public WorkerDestination GetCurrentDestination => _currentDestination;
+        public WorkerDestination GetAssignedStation => _assignedStation;
 
         //State:
         protected WorkerStateEnum _workerStateEnum;

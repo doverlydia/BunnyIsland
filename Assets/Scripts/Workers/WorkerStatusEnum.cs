@@ -1,6 +1,6 @@
 namespace Workers
 {
-    public enum WorkerStatus_Enum
+    public enum WorkerStatusEnum
     {
         Happy,
         Hungry,

@@ -4,8 +4,11 @@ namespace Workers
 {
     internal abstract class WorkerDestination
     {
-        protected GameObject _gameObject; //?
-        public abstract void UseByWorker(Worker worker);
+        public WorkerDestinationEnum DestinationEnum;
+
+        protected GameObject _gameObject;
         public virtual GameObject GetGameObject => _gameObject;
+        public abstract void UseByWorker(Worker worker);
+
     }
 }
