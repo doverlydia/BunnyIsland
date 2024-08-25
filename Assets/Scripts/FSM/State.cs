@@ -10,7 +10,7 @@ namespace FSM
         protected abstract void Exit();
         public abstract void Cancel();
 
-        protected void MoveToNextState(string id = null)
+        protected void GoToNextState(string id = null)
         {
             Exit();
             NextStateCalled?.Invoke(id);

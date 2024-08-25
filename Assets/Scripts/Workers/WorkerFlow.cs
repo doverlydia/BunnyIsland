@@ -1,37 +1,20 @@
-using Cysharp.Threading.Tasks;
-using UnityEngine.SocialPlatforms;
+using FSM;
 
 namespace Workers
 {
-    internal class WorkerFlow : Flow
+    class WorkerFlow : Flow
     {
-        Worker _worker;
-
-        Flow _subFlow;
-
-        UniTask _setObjectiveTask;
-
-        public override async void Start()
+        protected override void SetDefaultFlow()
         {
-            while (_worker != null)
-            {
-
-                await SetState(new SetObjectiveState(_worker));
-
-                if (_worker._currentDestination == null)
-                {
-
-                    //SetState(sleep)
-                    continue;
-                }
-
-                await SetState(new SequenceFlow(GetSimpleWalkToSequenceFlow()));
-            }
+            Add<SetTargetState>();
+            Add<ObjectiveSubFlowState>();
+            Add<EndState>();
         }
 
-        State[] GetSimpleWalkToSequenceFlow()
+        protected override void SetBindings()
         {
-            return new State[] { new WalkingState(_worker, _worker._currentDestination), new UseByWorkerState(_worker, _worker._currentDestination) };
+            Bind<SetTargetState, SleepingState>(SetTargetState.GoToSleepStateKey);
+            Bind<ObjectiveSubFlowState, SetTargetState>(ObjectiveSubFlowState.GoToSetTargetStateKey);
         }
     }
 }

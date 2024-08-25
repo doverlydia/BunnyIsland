@@ -6,15 +6,26 @@ namespace FSM
 {
     public abstract class Flow
     {
+        public event Action OnComplete;
+
         List<Type> _defaultFlow;
         Dictionary<Type, Dictionary<string, Type>> _contracts;
-
         State _currentState;
 
-        public void CreateFlow()
+        public void Play()
         {
             Debug.Log($"Starting Flow {GetType()}");
+
+            SetDefaultFlow();
+            SetBindings();
+
             GoToNextState();
+        }
+
+        public void Cancel()
+        {
+            _currentState?.Cancel();
+            Debug.Log($"Cancled flow {GetType()}");
         }
 
         protected abstract void SetDefaultFlow();
@@ -58,7 +69,8 @@ namespace FSM
                 var index = _defaultFlow.IndexOf(_currentState.GetType());
                 if (index == _defaultFlow.Count - 1)
                 {
-                    Debug.Log($"Finished Flow {GetType()}");
+                    Debug.Log($"Completed Flow {GetType()}");
+                    OnComplete?.Invoke();
                     return;
                 }
 
@@ -70,7 +82,12 @@ namespace FSM
         void EnterState(Type state)
         {
             Debug.Log($"Entering state {state}");
+
+            _currentState.NextStateCalled -= GoToNextState;
+
             _currentState = (State)Activator.CreateInstance(state);
+
+            _currentState.NextStateCalled += GoToNextState;
             _currentState.Enter();
         }
     }
