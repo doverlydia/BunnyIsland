@@ -7,14 +7,19 @@ using Unity.Plastic.Newtonsoft.Json;
 namespace Inventory
 {
     [Serializable]
-    class InventoryModel : Model, ISavable
+    public class InventoryModel : Model, ISavable
     {
         SerializedDictionary<string, int> _inventory;
 
         [JsonConstructor]
         public InventoryModel(SerializedDictionary<string, int> inventory)
         {
-            _inventory = inventory ?? new();
+            _inventory = inventory;
+        }
+
+        public InventoryModel()
+        {
+            _inventory = new();
         }
 
         internal int GetAmount(string id)
@@ -28,7 +33,7 @@ namespace Inventory
         {
             if (!_inventory.TryAdd(id, amount))
                 _inventory[id] += amount;
-            
+
             Changed();
         }
 

@@ -17,7 +17,7 @@ namespace Savable
                 _cached[path] = savable;
         }
 
-        public T Load<T>(string id = null) where T : ISavable
+        public T Load<T>(string id = null) where T : ISavable, new()
         {
             var path = GetPath(typeof(T).Name, id);
 
@@ -52,15 +52,20 @@ namespace Savable
             tw.Write(json);
         }
 
-        T LoadFromDisk<T>(string id) where T : ISavable
+        T LoadFromDisk<T>(string id) where T : ISavable, new()
         {
             var path = GetPath(typeof(T).Name, id);
+            T obj;
 
             if (!File.Exists(path))
-                return default;
-
-            var json = File.ReadAllText(path);
-            T obj = JsonConvert.DeserializeObject<T>(json);
+            {
+                obj = new();
+            }
+            else
+            {
+                var json = File.ReadAllText(path);
+                obj = JsonConvert.DeserializeObject<T>(json);
+            }
 
             _cached.Add(path, obj);
 

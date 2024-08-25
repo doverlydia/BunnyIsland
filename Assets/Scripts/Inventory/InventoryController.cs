@@ -2,16 +2,16 @@ using MVC;
 using Savable;
 using Zenject;
 
-namespace Resource
+namespace Inventory
 {
-    public class ResourcesController : Controller<ResourcesModel>
+    public class InventoryController : Controller<InventoryModel>
     {
         [Inject]
         SaveService _saveService;
 
         private void Awake()
         {
-            var model = _saveService.Load<ResourcesModel>();
+            var model = _saveService.Load<InventoryModel>();
             SetModel(model);
         }
     }

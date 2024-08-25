@@ -7,14 +7,19 @@ using Unity.Plastic.Newtonsoft.Json;
 namespace Resource
 {
     [Serializable]
-    class ResourcesModel : Model, ISavable
+    public class ResourcesModel : Model, ISavable
     {
         SerializedDictionary<string, int> _resources;
 
         [JsonConstructor]
         public ResourcesModel(SerializedDictionary<string, int> resources)
         {
-            _resources = resources ?? new();
+            _resources = resources;
+        }
+
+        public ResourcesModel()
+        {
+            _resources = new();
         }
 
         internal int GetAmount(string id)
