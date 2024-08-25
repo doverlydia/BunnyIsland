@@ -4,7 +4,7 @@ namespace FSM
 {
     public abstract class State
     {
-        internal event Action<string> NextStateCalled;
+        internal event Action<string> NextStateRequested;
 
         public abstract void Enter();
         protected abstract void Exit();
@@ -13,7 +13,7 @@ namespace FSM
         protected void GoToNextState(string id = null)
         {
             Exit();
-            NextStateCalled?.Invoke(id);
+            NextStateRequested?.Invoke(id);
         }
     }
 

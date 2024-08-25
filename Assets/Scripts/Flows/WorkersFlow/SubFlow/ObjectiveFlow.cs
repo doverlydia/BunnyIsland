@@ -8,11 +8,11 @@ namespace WorkersFlow
         {
             Add<WalkState>();
             Add<InvokeState>();
+            Add<EndState>();
         }
 
         protected override void SetBindings()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

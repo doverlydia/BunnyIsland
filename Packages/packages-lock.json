@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "9057452c86079e4265228480b1439442894d5078"
     },
+    "com.madsbangh.easybuttons": {
+      "version": "https://github.com/madsbangh/EasyButtons.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "73d2383899210da808a1b27329cdaa8000de557b"
+    },
     "com.unity.adaptiveperformance": {
       "version": "4.0.1",
       "depth": 1,

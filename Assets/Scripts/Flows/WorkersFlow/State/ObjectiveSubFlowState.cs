@@ -6,19 +6,32 @@ namespace WorkersFlow
     {
         internal const string GoToSetTargetStateKey = "GoToSetTargetStateKey";
 
-        public override void Cancel()
-        {
-            throw new System.NotImplementedException();
-        }
+        ObjectiveSubFlow _objectiveFlow = new();
 
         public override void Enter()
         {
-            throw new System.NotImplementedException();
+            _objectiveFlow.CreateFlow();
+            _objectiveFlow.OnComplete += GoToSetTarget;
+        }
+
+        void GoToSetTarget()
+        {
+            GoToNextState(GoToSetTargetStateKey);
         }
 
         protected override void Exit()
         {
-            throw new System.NotImplementedException();
+            Clean();
+        }
+
+        public override void Cancel()
+        {
+            Clean();
+        }
+
+        void Clean()
+        {
+            _objectiveFlow.OnComplete -= GoToSetTarget;
         }
     }
 }

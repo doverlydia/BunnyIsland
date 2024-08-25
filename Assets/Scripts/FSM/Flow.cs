@@ -8,8 +8,8 @@ namespace FSM
     {
         public event Action OnComplete;
 
-        List<Type> _defaultFlow;
-        Dictionary<Type, Dictionary<string, Type>> _contracts;
+        List<Type> _defaultFlow = new();
+        Dictionary<Type, Dictionary<string, Type>> _contracts = new();
         State _currentState;
 
         public void CreateFlow()
@@ -50,13 +50,19 @@ namespace FSM
 
         void GoToNextState(string key = null)
         {
-            var typeOfCurrentState = _currentState.GetType();
+            if (_currentState == null)
+            {
+                EnterState(_defaultFlow[0]);
+                return;
+            }
+
             if (key != null)
             {
-                if (_contracts.TryGetValue(typeOfCurrentState, out var contract)
+                if (_contracts.TryGetValue(_currentState.GetType(), out var contract)
                     && contract.TryGetValue(key, out var nextState))
                 {
                     EnterState(nextState);
+                    return;
                 }
                 else
                 {
@@ -64,30 +70,28 @@ namespace FSM
                     throw new Exception($"No binding exists for {_currentState.GetType()} under the key {key}!");
                 }
             }
-            else
-            {
-                var index = _defaultFlow.IndexOf(_currentState.GetType());
-                if (index == _defaultFlow.Count - 1)
-                {
-                    Debug.Log($"Completed Flow {GetType()}");
-                    OnComplete?.Invoke();
-                    return;
-                }
 
-                var nextState = _defaultFlow[index];
-                EnterState(nextState);
+            var index = _defaultFlow.IndexOf(_currentState.GetType());
+            if (index == _defaultFlow.Count - 1)
+            {
+                Debug.Log($"Completed Flow {GetType()}");
+                OnComplete?.Invoke();
+                return;
             }
+
+            EnterState(_defaultFlow[index + 1]);
         }
 
         void EnterState(Type state)
         {
             Debug.Log($"Entering state {state}");
 
-            _currentState.NextStateCalled -= GoToNextState;
+            if (_currentState != null)
+                _currentState.NextStateRequested -= GoToNextState;
 
             _currentState = CreateState(state);
 
-            _currentState.NextStateCalled += GoToNextState;
+            _currentState.NextStateRequested += GoToNextState;
             _currentState.Enter();
         }
 
