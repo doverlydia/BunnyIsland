@@ -5,6 +5,7 @@ namespace Workers
 {
     internal class SetObjectiveState : WorkerState
     {
+      
         public SetObjectiveState(Worker worker) : base(worker)
         {
 
@@ -23,6 +24,7 @@ namespace Workers
                 //check if starving
                 if (_worker.IsStraving())
                 {
+                    _worker._currentDestination = null;
                     //_worker -> GoToSleep();
                     return;
                 }
@@ -34,8 +36,10 @@ namespace Workers
                          // else continue to check 2#
 
             //check resource load 2#
-            if(_worker.HasResource())
+            if(_worker.ResourcesFull())
             {
+                _worker._currentDestination = _worker._assignedStation;
+                //_workerFlow.SetState(new SequenceFlow(new State[] { new WalkingState(_worker, _worker._assignedStation), new UseByWorkerState(_worker, _worker._assignedStation) }));
                 //if station is null -> sleep?
                 //walk to station
                 return;
@@ -45,6 +49,8 @@ namespace Workers
             //check resource in radius 3#
             //if found -> walk to resource
             //else sleep.
+                    _worker._currentDestination = null;
+
         }
     }
 }

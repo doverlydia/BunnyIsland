@@ -8,9 +8,10 @@ namespace Workers
         protected WorkerDestination _destination;
 
         //protected GameObject _destinationObject;
-        internal WalkingState(Worker worker) : base(worker)
+        internal WalkingState(Worker worker, WorkerDestination workerDestination) : base(worker)
         {
-            _destination = _worker.GetCurrentDestination;
+            _destination = workerDestination;
+            _worker._currentDestination = _destination;
         }
 
         protected override void BeforeStateBegin()
@@ -33,7 +34,7 @@ namespace Workers
 
             OnStateEnd();
 
-            _destination.UseByWorker(_worker); //?
+            //_destination.UseByWorker(_worker); //?
         }
     }
 }

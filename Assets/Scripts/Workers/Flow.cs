@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+
 namespace Workers
 {
     internal class Flow
@@ -5,9 +7,15 @@ namespace Workers
         protected State _currentState;
         public State GetCurrentState { get => _currentState; }
 
-        public void SetCurrentState(State state)
+        public virtual void Start()
         {
-            _currentState = state;  
+            //
+        }
+
+        public UniTask SetState(State state)
+        {
+            _currentState = state;
+            return _currentState.StartState();
         }
     }
 }

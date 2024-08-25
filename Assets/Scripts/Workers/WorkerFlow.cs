@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using UnityEngine.SocialPlatforms;
 
 namespace Workers
 {
@@ -10,32 +11,27 @@ namespace Workers
 
         UniTask _setObjectiveTask;
 
-        public async void Start()
+        public override async void Start()
         {
-            _currentState = new SetObjectiveState(_worker);
-            _setObjectiveTask = _currentState.StartState();
+            while (_worker != null)
+            {
 
-            await _setObjectiveTask;
+                await SetState(new SetObjectiveState(_worker));
 
-            
+                if (_worker._currentDestination == null)
+                {
 
-            //switch (_worker.GetCurrentDestination.DestinationEnum)
-            //{
-            //    case WorkerDestinationEnum.Station:
-            //        _subFlow = new Flow();
-            //        _subFlow.SetCurrentState(new WalkingState(_worker));
-            //        break;
-            //    case WorkerDestinationEnum.Resource:
+                    //SetState(sleep)
+                    continue;
+                }
 
-            //        break;
-            //    case WorkerDestinationEnum.Food:
-
-            //        break;
-            //    case WorkerDestinationEnum.Other:
-
-            //        break;
-            //}
+                await SetState(new SequenceFlow(GetSimpleWalkToSequenceFlow()));
+            }
         }
 
+        State[] GetSimpleWalkToSequenceFlow()
+        {
+            return new State[] { new WalkingState(_worker, _worker._currentDestination), new UseByWorkerState(_worker, _worker._currentDestination) };
+        }
     }
 }

@@ -22,10 +22,10 @@ namespace Workers
         protected float _hungerComforotThreshold;
         protected float _hungerStarvingThreshold;
 
-        protected WorkerDestination _currentDestination;
-        protected WorkerDestination _assignedStation;
-        public WorkerDestination GetCurrentDestination => _currentDestination;
-        public WorkerDestination GetAssignedStation => _assignedStation;
+        public WorkerDestination _currentDestination;
+        public WorkerDestination _assignedStation;
+        //public WorkerDestination GetCurrentDestination => _currentDestination;
+        //public WorkerDestination GetAssignedStation => _assignedStation;
 
         //State:
         protected WorkerStateEnum _workerStateEnum;
@@ -41,9 +41,9 @@ namespace Workers
         {
             return _currentHunger <= _hungerStarvingThreshold;
         }
-        public virtual bool HasResource()
+        public virtual bool ResourcesFull()
         {
-            return _amountGathered > 0;
+            return _amountGathered >= _gatherCapacity;
         }
 
         public GameObject GetGameObject => _gameObject;
@@ -61,11 +61,5 @@ namespace Workers
             //agent walk to destination, do we know what to do when we get there?
         }
         //per state,
-
-
-        
-
-
-
     }
 }
