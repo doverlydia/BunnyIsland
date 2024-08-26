@@ -16,11 +16,13 @@ MonoBehaviour:
     _serializedList:
     - Key: htkou
       Value:
-        Price: 0
-        Icon: {fileID: 0}
-        Prefab: {fileID: 0}
+        Prefab: {fileID: 5380995972589146777, guid: 4fd7d21fc7bbee744b16f9252201cf83,
+          type: 3}
+    - Key: tgtty
+      Value:
+        Prefab: {fileID: 7901288667082605896, guid: c0f71e3f7f3bb2b4290997d410053df1,
+          type: 3}
     - Key: gtgr
       Value:
-        Price: 0
-        Icon: {fileID: 0}
-        Prefab: {fileID: 0}
+        Prefab: {fileID: 2370150882013972721, guid: c098095c19a45a243b5a122946727fc6,
+          type: 3}

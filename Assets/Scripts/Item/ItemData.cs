@@ -6,10 +6,6 @@ namespace Item
     [Serializable]
     public class ItemData
     {
-        [SerializeField]
-        internal Sprite Icon;
-
-        [SerializeField]
-        internal GameObject Prefab;
+        public GameObject Prefab;
     }
 }

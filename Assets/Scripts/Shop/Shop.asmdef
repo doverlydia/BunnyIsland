@@ -3,7 +3,10 @@
     "rootNamespace": "Shop",
     "references": [
         "GUID:c358a2dd58a6c714b882a45c98b5d769",
-        "GUID:d525ad6bd40672747bde77962f1c401e"
+        "GUID:d525ad6bd40672747bde77962f1c401e",
+        "GUID:21d1eb854b91ade49bc69a263d12bee2",
+        "GUID:f2d4f2b06eec53f4daa295ac1b401a41",
+        "GUID:f24cf67903b27ae498b3069ecc30cc11"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
