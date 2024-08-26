@@ -25,7 +25,14 @@ namespace FSM
         public void Dispose()
         {
             _currentState?.Dispose();
-            Debug.Log($"Cancled flow {GetType()}");
+
+            if (_currentState != null)
+            {
+                _currentState.NextStateRequested -= GoToNextState;
+                _currentState = null;
+            }
+
+            Debug.Log($"Disposed flow {GetType()}");
         }
 
         protected abstract void SetDefaultFlow();
@@ -66,7 +73,7 @@ namespace FSM
                 }
                 else
                 {
-                    _currentState?.Dispose();
+                    Dispose();
                     throw new Exception($"No binding exists for {_currentState.GetType()} under the key {key}!");
                 }
             }
@@ -85,9 +92,7 @@ namespace FSM
         void EnterState(Type state)
         {
             Debug.Log($"Entering state {state}");
-
-            if (_currentState != null)
-                _currentState.NextStateRequested -= GoToNextState;
+            Dispose();
 
             _currentState = CreateState(state);
 

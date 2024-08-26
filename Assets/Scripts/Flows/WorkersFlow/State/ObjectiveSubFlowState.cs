@@ -20,14 +20,13 @@ namespace WorkersFlow
             GoToNextState(GoToSetTargetStateKey);
         }
 
-        protected override void Exit()
-        {
-            Dispose();
-        }
+        protected override void Exit() { }
 
         public override void Dispose()
         {
             _objectiveFlow.OnComplete -= GoToSetTarget;
+            _objectiveFlow.Dispose();
+            _objectiveFlow = null;
         }
     }
 }
