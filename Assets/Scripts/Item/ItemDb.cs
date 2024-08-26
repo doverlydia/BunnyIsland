@@ -6,6 +6,7 @@ namespace Item
     [CreateAssetMenu(fileName = "ItemDb", menuName = "Items/ItemDb")]
     public class ItemDb : ScriptableObject
     {
+        [SerializedDictionary("Item Id", "Item Data")]
         public SerializedDictionary<string, ItemData> ItemMap;
 
         internal ItemData GetItem(string id)

@@ -5,7 +5,7 @@ namespace Resource.Icon
     [CreateAssetMenu(fileName = "ResourceIconDb", menuName = "Resource")]
     class ResourceIconDb : ScriptableObject
     {
-        [SerializeField]
+        [SerializedDictionary("Item Id", "Icon"), SerializeField]
         SerializedDictionary<string, Sprite> _resourceSpriteMap;
 
         internal Sprite GetResourceIcon(string id)

@@ -12,6 +12,7 @@ namespace Shop
         [SerializeField]
         internal ItemDb _itemDb;
 
+        [SerializedDictionary("Item Id", "Price")]
         public SerializedDictionary<string, int> Shop;
     }
 }

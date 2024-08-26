@@ -7,9 +7,6 @@ namespace Item
     public class ItemData
     {
         [SerializeField]
-        internal int Price;
-
-        [SerializeField]
         internal Sprite Icon;
 
         [SerializeField]
