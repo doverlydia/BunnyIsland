@@ -9,18 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b2d0b46c52c5404984e6ba3d4d88ddd, type: 3}
-  m_Name: ItemDb
+  m_Script: {fileID: 11500000, guid: 26ba23e06e3f4a94eb48c314006b9255, type: 3}
+  m_Name: ShopModel
   m_EditorClassIdentifier: 
-  ItemMap:
+  _itemDb: {fileID: 11400000, guid: 186512e347299e64f894ebdd07841e23, type: 2}
+  Shop:
     _serializedList:
-    - Key: htkou
-      Value:
-        Price: 0
-        Icon: {fileID: 0}
-        Prefab: {fileID: 0}
     - Key: gtgr
-      Value:
-        Price: 0
-        Icon: {fileID: 0}
-        Prefab: {fileID: 0}
+      Value: 0
+    - Key: htkou
+      Value: 0
