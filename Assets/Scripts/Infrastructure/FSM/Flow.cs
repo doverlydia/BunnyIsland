@@ -31,8 +31,6 @@ namespace FSM
                 _currentState.NextStateRequested -= GoToNextState;
                 _currentState = null;
             }
-
-            Debug.Log($"Disposed flow {GetType()}");
         }
 
         protected abstract void SetDefaultFlow();
