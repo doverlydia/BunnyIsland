@@ -1,12 +1,11 @@
 using EasyButtons;
 using Item;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Splines;
 
 namespace Shop
 {
-    class ShopViewController :  MonoBehaviour
+    class ShopViewController : MonoBehaviour
     {
         [SerializeField]
         SplineContainer _splineContainer;
@@ -16,12 +15,11 @@ namespace Shop
         ItemDb _itemDb;
 
         [Button]
-        internal void Configure()
+        internal void Configure(ItemData[] items)
         {
-            var items = _shopModel.Shop.Select(x=> _itemDb.ItemMap[x.Key].Prefab).ToArray();
             foreach (var item in items)
             {
-                var obj = Instantiate(item, _splineContainer.transform);
+                Instantiate(item.Prefab, _splineContainer.transform);
             }
         }
     }

@@ -9,7 +9,7 @@ public enum Alignment
     Top
 }
 
-[ExecuteAlways]
+[ExecuteAlways, RequireComponent(typeof(SplineContainer))]
 class SplineLayoutGroup : MonoBehaviour
 {
     [SerializeField]
@@ -29,6 +29,11 @@ class SplineLayoutGroup : MonoBehaviour
 
     [SerializeField]
     Alignment alignment = Alignment.Center;
+
+    private void Awake()
+    {
+        splineContainer = GetComponent<SplineContainer>();
+    }
 
     void Update()
     {

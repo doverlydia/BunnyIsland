@@ -2,10 +2,14 @@ using FSM;
 
 namespace WorkersFlow
 {
-    public class InvokeState : State
+    class InvokeState : State<WorkerFlowModel>
     {
         public override void Enter()
         {
+            if(FlowModel.Target == null)
+            {
+
+            }
             GoToNextState();
         }
 
